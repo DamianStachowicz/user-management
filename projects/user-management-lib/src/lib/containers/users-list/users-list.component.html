@@ -1,0 +1,21 @@
+<div class="content-container">
+  <div class="content-container__header"></div>
+  <div class="content-container__table table">
+    <div class="table__header">
+      <div class="table__cell"></div>
+      <div class="table__cell" i18n>id</div>
+      <div class="table__cell" i18n>username</div>
+      <div class="table__cell" i18n>permissions</div>
+    </div>
+    <div class="table__row" *ngFor="let user of (users$ | async); index as i" [ngClass]="{'table__row--dark': i % 2}">
+      <div class="table__cell">
+        <button i18n>View</button>
+        <button i18n>Edit</button>
+      </div>
+      <div class="table__cell">{{user.id}}</div>
+      <div class="table__cell">{{user.name}}</div>
+      <div class="table__cell">
+      </div>
+    </div>
+  </div>
+</div>
