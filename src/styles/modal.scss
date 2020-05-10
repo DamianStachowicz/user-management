@@ -1,0 +1,41 @@
+$modal-background-color: #fbfcff;
+
+.overlay {
+  background-color: black;
+  height: 100vh;
+  left: 0;
+  opacity: 0.5;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 100;
+}
+
+.modal {
+  background-color: $modal-background-color;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  left: 10px;
+  position: absolute;
+  right: 10px;
+  padding: 10px;
+  top: 10px;
+  z-index: 101;
+
+  & &__text {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  & &__buttons {
+    text-align: center;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal {
+    margin: 0 auto;
+    width: 500px;
+  }
+}

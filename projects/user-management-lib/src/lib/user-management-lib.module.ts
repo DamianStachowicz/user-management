@@ -1,14 +1,15 @@
-import { NgModule } from '@angular/core';
-import { UsersListComponent } from './containers/users-list/users-list.component';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { UtilsLibModule } from 'utils-lib';
 import { UserEditComponent } from './containers/user-edit/user-edit.component';
+import { UsersListComponent } from './containers/users-list/users-list.component';
 
 const routes = [
   { path: 'users-list', component: UsersListComponent },
   { path: 'user-edit/:id', component: UserEditComponent },
-  { path: '', redirectTo: 'users-list', pathMatch: 'full' }
+  { path: '', redirectTo: 'users-list', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -16,8 +17,9 @@ const routes = [
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    UtilsLibModule,
   ],
-  exports: []
+  exports: [],
 })
-export class UserManagementLibModule { }
+export class UserManagementLibModule {}

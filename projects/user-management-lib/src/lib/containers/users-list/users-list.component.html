@@ -6,16 +6,23 @@
       <div class="table__cell" i18n>username</div>
       <div class="table__cell" i18n>permissions</div>
     </div>
+    <div class="table__row" *ngIf="!users || users.length < 1">
+      <div class="table__cell">
+        There are no users
+      </div>
+    </div>
     <div
       class="table__row"
-      *ngFor="let user of users$ | async; index as i"
+      *ngFor="let user of users; index as i"
       [ngClass]="{ 'table__row--dark': i % 2 }"
     >
       <div class="table__cell">
         <button class="btn" [routerLink]="['/users/user-edit', user.id]" i18n>
           Edit
         </button>
-        <button class="btn btn-danger" i18n>Delete</button>
+        <button class="btn btn-danger" (click)="openDeleteModal(user)" i18n>
+          Delete
+        </button>
       </div>
       <div class="table__cell">{{ user.name }}</div>
       <div class="table__cell">
@@ -28,3 +35,15 @@
     </div>
   </div>
 </div>
+
+<lib-modal *ngIf="modalOpen" (overlayClicked)="modalOpen = false"
+  ><div text>
+    Are you sure you want to delete the user {{ selectedUser.name }}?
+  </div>
+  <div buttons>
+    <button class="btn btn-danger" (click)="deleteUser(selectedUser.id)">
+      Yes
+    </button>
+    <button class="btn" (click)="modalOpen = false">No</button>
+  </div></lib-modal
+>
