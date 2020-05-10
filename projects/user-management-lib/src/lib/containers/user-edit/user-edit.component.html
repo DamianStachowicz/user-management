@@ -1,0 +1,25 @@
+<div class="content-container" *ngIf="user$ | async as user">
+  <div class="content-container__user-info user-info">
+    {{ user.name }}
+  </div>
+  <div class="content-container__table table">
+    <div class="table__header">
+      <div class="table__cell" i18n>code</div>
+      <div class="table__cell" i18n>description</div>
+    </div>
+    <div
+      class="table__row"
+      *ngIf="!user.permissions || user.permissions.length < 1"
+    >
+      <div class="table__cell">
+        This user has no permissions
+      </div>
+    </div>
+    <div class="table__row" *ngFor="let permission of user.permissions">
+      <div class="table__cell">{{ permission }}</div>
+      <div class="table__cell">
+        At some point here's gonna be a description for {{ permission }}
+      </div>
+    </div>
+  </div>
+</div>

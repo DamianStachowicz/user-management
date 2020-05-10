@@ -1,0 +1,30 @@
+$btn-danger-background-color: #d8353a;
+$btn-danger-hover-background-color: #c72429;
+$btn-default-background-color: #274156;
+$btn-default-color: #fbfcff;
+$btn-hover-background-color: #163045;
+$btn-padding: 10px 15px;
+$btn-margin: 2px;
+
+.btn {
+  background-color: $btn-default-background-color;
+  border: none;
+  color: $btn-default-color;
+  display: inline-block;
+  margin: $btn-margin;
+  padding: $btn-padding;
+
+  &:hover {
+    background-color: $btn-hover-background-color;
+    cursor: pointer;
+    transition: ease-in 0.2s;
+  }
+}
+
+.btn-danger {
+  background-color: $btn-danger-background-color;
+
+  &:hover {
+    background-color: $btn-danger-hover-background-color;
+  }
+}
