@@ -7,7 +7,7 @@ import { User } from '../../dto/user.interface';
   providedIn: 'root',
 })
 export class UsersService {
-  private baseUri = 'localhost:8080/api/v0';
+  baseUri = 'localhost:8080/api/v0';
 
   // temporary mock used until suitable backend is provided
   private users: User[] = [
@@ -53,7 +53,7 @@ export class UsersService {
       observer.next(user);
       observer.complete();
     });
-    return this.httpClient.post<User>(`${this.baseUri}/users/`, user);
+    return this.httpClient.post<User>(`${this.baseUri}/users`, user);
   }
 
   updateUser(user: User): Observable<User> {
