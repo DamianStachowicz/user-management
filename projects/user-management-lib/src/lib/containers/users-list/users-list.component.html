@@ -1,5 +1,21 @@
 <div class="content-container">
-  <div class="content-container__filter filter"></div>
+  <form [formGroup]="filterForm" class="content-container__filter filter">
+    <lib-input
+      formControlName="username"
+      placeholder="username"
+      [maxlength]="40"
+      [displayMaxLength]="true"
+    ></lib-input>
+    <lib-input
+      formControlName="permissions"
+      placeholder="permissions"
+      [maxlength]="60"
+      [displayMaxLength]="true"
+    ></lib-input>
+    <div class="filter__btn">
+      <button class="btn" (click)="filter()">filter</button>
+    </div>
+  </form>
   <div class="content-container__table table">
     <div class="table__header">
       <div class="table__cell"></div>

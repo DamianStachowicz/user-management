@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../../dto/user.interface';
+import { User } from '../../interfaces/user.interface';
+import { UserParams } from '../../interfaces/user-params.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class UsersService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getUsersList(): Observable<User[]> {
+  getUsersList(params?: UserParams): Observable<User[]> {
     // mocked values for the time being
     return new Observable<User[]>((observer) => {
       observer.next(this.users);

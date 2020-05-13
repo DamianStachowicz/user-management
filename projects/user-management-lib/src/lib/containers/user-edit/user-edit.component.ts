@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from '../../dto/user.interface';
+import { User } from '../../interfaces/user.interface';
 import { UsersService } from '../../services/users-service/users.service';
 
 @Component({

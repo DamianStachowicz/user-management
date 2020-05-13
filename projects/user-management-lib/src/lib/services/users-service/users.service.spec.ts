@@ -3,7 +3,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { getTestBed, TestBed } from '@angular/core/testing';
-import { User } from '../../dto/user.interface';
+import { User } from '../../interfaces/user.interface';
 import { UsersService } from './users.service';
 
 describe('UsersService', () => {

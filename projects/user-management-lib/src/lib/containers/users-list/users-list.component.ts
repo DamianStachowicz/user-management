@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReplaySubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { User } from '../../dto/user.interface';
+import { User } from '../../interfaces/user.interface';
 import { UsersService } from '../../services/users-service/users.service';
 
 @Component({
@@ -12,11 +13,17 @@ import { UsersService } from '../../services/users-service/users.service';
 export class UsersListComponent implements OnInit, OnDestroy {
   private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
 
+  filterForm: FormGroup;
   modalOpen = false;
   selectedUser: User;
   users: User[];
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private usersService: UsersService
+  ) {
+    this.createForm();
+  }
 
   ngOnInit() {
     this.filter();
@@ -27,9 +34,17 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private filter() {
+  private createForm() {
+    this.filterForm = this.formBuilder.group({
+      username: '',
+      permissions: '',
+    });
+  }
+
+  filter() {
+    console.log(this.filterForm.getRawValue());
     this.usersService
-      .getUsersList()
+      .getUsersList(this.filterForm.getRawValue())
       .pipe(takeUntil(this.destroy$))
       .subscribe((users) => (this.users = users));
   }
