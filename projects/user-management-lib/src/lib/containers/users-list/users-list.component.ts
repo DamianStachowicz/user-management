@@ -42,7 +42,6 @@ export class UsersListComponent implements OnInit, OnDestroy {
   }
 
   filter() {
-    console.log(this.filterForm.getRawValue());
     this.usersService
       .getUsersList(this.filterForm.getRawValue())
       .pipe(takeUntil(this.destroy$))

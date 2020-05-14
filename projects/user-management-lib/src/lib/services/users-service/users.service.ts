@@ -34,7 +34,14 @@ export class UsersService {
   getUsersList(params?: UserParams): Observable<User[]> {
     // mocked values for the time being
     return new Observable<User[]>((observer) => {
-      observer.next(this.users);
+      observer.next(
+        this.users.filter(
+          (user) =>
+            user.name.toLowerCase().includes(params.username.toLowerCase()) &&
+            (!params.permissions ||
+              user.permissions.includes(params.permissions.toUpperCase()))
+        )
+      );
       observer.complete();
     });
     return this.httpClient.get<User[]>(`${this.baseUri}/users`);
