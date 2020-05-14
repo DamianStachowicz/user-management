@@ -14,6 +14,7 @@ export class UsersListComponent implements OnInit, OnDestroy {
   private destroy$: ReplaySubject<boolean> = new ReplaySubject(1);
 
   filterForm: FormGroup;
+  addForm: FormGroup;
   modalOpen = false;
   selectedUser: User;
   users: User[];
@@ -22,7 +23,8 @@ export class UsersListComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private usersService: UsersService
   ) {
-    this.createForm();
+    this.createFilterForm();
+    this.createAddForm();
   }
 
   ngOnInit() {
@@ -34,8 +36,15 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  private createForm() {
+  private createFilterForm() {
     this.filterForm = this.formBuilder.group({
+      username: '',
+      permissions: '',
+    });
+  }
+
+  private createAddForm() {
+    this.addForm = this.formBuilder.group({
       username: '',
       permissions: '',
     });
@@ -57,5 +66,16 @@ export class UsersListComponent implements OnInit, OnDestroy {
     this.usersService.deleteUser(id).subscribe();
     this.modalOpen = false;
     this.filter();
+  }
+
+  addUser() {
+    const rawValue = this.addForm.getRawValue();
+    const user: User = {
+      id: null,
+      name: rawValue.username,
+      permissions: rawValue.permissions.replace(/\s/, '').split(','),
+    };
+    this.addForm.reset({ username: '', permissions: '' });
+    this.usersService.createUser(user).subscribe(() => this.filter());
   }
 }

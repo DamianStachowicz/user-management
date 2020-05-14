@@ -11,6 +11,7 @@ export class UsersService {
   baseUri = 'localhost:8080/api/v0';
 
   // temporary mock used until suitable backend is provided
+  private lastId = 2;
   private users: User[] = [
     {
       id: '0',
@@ -57,6 +58,7 @@ export class UsersService {
   }
 
   createUser(user: User): Observable<User> {
+    this.users.push({ ...user, id: `${++this.lastId}` });
     return new Observable<User>((observer) => {
       observer.next(user);
       observer.complete();
